@@ -1,0 +1,4 @@
+Original author of the website: 
+Cameron Adams
+https://twitter.com/themaninblue
+http://themaninblue.com/about/
