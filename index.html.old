@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1></h1>
+<p></p>
+
+</body>
+</html>
+<script src="/assets/js/confetti.js"></script>
+<script>  startConfetti()</script>
