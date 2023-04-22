@@ -86,7 +86,7 @@ input[type=text], input[type=number] {
 }
 
 img{
-    width:100px;
+    width:200px;
 }
 
 table{
@@ -123,4 +123,4 @@ h1{
     margin: 10px;
 }
 
-.w3-animate-right{position:relative;animation:animateright 0.4s}@keyframes animateright{from{right:-300px;opacity:0} to{right:0;opacity:1}}
+.w3-animate-right{position:relative;animation:animateright 1.4s}@keyframes animateright{from{right:-300px;opacity:0} to{right:0;opacity:1}}
