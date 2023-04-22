@@ -123,4 +123,4 @@ h1{
     margin: 10px;
 }
 
-.w3-animate-right{position:relative;animation:animateright 0.4s;animation-timing-function:ease-out;animation-duration: 10s;}@keyframes animateright{from{right:-300px;opacity:0} to{right:0;opacity:1}}
+.w3-animate-right{position:relative;animation:animateright 0.4s;animation-timing-function:ease-in ;animation-duration: 1s;}@keyframes animateright{from{right:-300px;opacity:0} to{right:0;opacity:1}}

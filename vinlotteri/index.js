@@ -35,14 +35,14 @@ var app = new Vue({
                         n = ~~(Math.random() * (this.tickets.length));
                         this.winner = this.tickets[n];
                         this.winningNumber = n;
-                    }, 40000 / i)
+                    }, 80000 / i)
                 }
                 setTimeout(() => {
                     this.previousWinners.push(this.winner);
                     this.removeTicket(this.winningNumber);
                     this.wColor = 'green';
                     this.drawing = false;
-                }, 4050)
+                }, 8050)
             }
         },
         undoDrawing(i) {
