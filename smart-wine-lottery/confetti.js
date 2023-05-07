@@ -1,6 +1,6 @@
 // https://www.cssscript.com/demo/confetti-falling-animation/
 
-var maxParticleCount = 1500; //set max confetti count150 default
+var maxParticleCount = 150; //set max confetti count150 default
 var particleSpeed = 2; //set the particle animation speed
 var startConfetti; //call to start confetti animation
 var stopConfetti; //call to stop adding confetti
