@@ -27,6 +27,7 @@ var app = new Vue({
         },
         drawTicket() {
             if(this.tickets.length) {
+                stopConfetti();
                 this.drawing = true;
                 let n = 0;
                 this.wColor = 'red';
@@ -42,7 +43,7 @@ var app = new Vue({
                     this.removeTicket(this.winningNumber);
                     this.wColor = 'green';
                     this.drawing = false;
-                    this.startConfetti;
+                    startConfetti();
                 }, 16050)
             }
         },
@@ -51,6 +52,8 @@ var app = new Vue({
             this.winningNumber = -1;
             this.winner = false;
             this.previousWinners.splice(i, 1);
+	        stopConfetti();
+
         },
         removeTicket(draw) {
             this.tickets.splice(draw, 1);
