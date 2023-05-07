@@ -45,7 +45,7 @@ var app = new Vue({
                     this.drawing = false;
                     startConfetti();
                 }, 16050)
-                stopconfettiTimeout(() => {
+                setTimeout(() => {
                     removeConfetti();
                 }, 20000)
             }
