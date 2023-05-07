@@ -42,7 +42,7 @@ var app = new Vue({
                     this.removeTicket(this.winningNumber);
                     this.wColor = 'green';
                     this.drawing = false;
-                    this.startConfetti
+                    this.startConfetti;
                 }, 16050)
             }
         },
