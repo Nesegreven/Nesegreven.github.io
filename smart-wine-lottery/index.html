@@ -32,7 +32,7 @@
         </table>
     </div>
     <div v-if="ticketdrawing">
-        <div><button class="m-button" v-on:click="ticketdrawing = !ticketdrawing">Legg til flere lodd</button></div>
+        <div><button class="m-button" v-on:click="ticketdrawing = !ticketdrawing;removeConfetti();">Legg til flere lodd</button></div>
         <div><button :disabled="drawing" class="a-button" v-on:click="drawTicket">Trekk lodd</button></div>
         <table>
             <h1 v-bind:class="[wColor]" id="winner"  v-if="winner">{{winner}}</h1>
