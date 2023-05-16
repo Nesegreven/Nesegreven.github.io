@@ -23,6 +23,7 @@ var app = new Vue({
                 this.tickets = this.tickets.concat(new Array(this.uTickets).fill(this.uName));
                 this.uName = "";
                 this.uTickets = 1;
+                removeConfetti();
             }
         },
         drawTicket() {
