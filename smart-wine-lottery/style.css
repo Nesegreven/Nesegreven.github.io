@@ -124,8 +124,3 @@ h1{
 }
 
 /*.w3-animate-right{position:relative;animation:animateright 0.4s;animation-timing-function:ease-in ;animation-duration: 1s;}@keyframes animateright{from{right:-300px;opacity:0} to{right:0;opacity:1}}*/
-@keyframes flash {
-    0% { color: black; }
-    50% { color: white; }
-    100% { color: black; }
-  }
