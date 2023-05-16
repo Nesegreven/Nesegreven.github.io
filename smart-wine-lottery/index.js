@@ -30,13 +30,13 @@ var app = new Vue({
                 removeConfetti();
                 this.drawing = true;
                 let n = 0;
-                this.wColor = 'red';
+                //this.wColor = 'red';
                 for (let i = 10; i < 100; i++) {
                     setTimeout(() => {
                         n = ~~(Math.random() * (this.tickets.length));
                         this.winner = this.tickets[n];
                         this.winningNumber = n;
-                        this.wColor = i % 2 === 0 ? 'red' : 'blue';
+                        this.wColor = i % 2 === 0 ? 'red' : 'yellow';
                     }, 150000 / i)
                 }
                 setTimeout(() => {
