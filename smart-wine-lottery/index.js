@@ -36,6 +36,7 @@ var app = new Vue({
                         n = ~~(Math.random() * (this.tickets.length));
                         this.winner = this.tickets[n];
                         this.winningNumber = n;
+                        this.wColor = i % 2 === 0 ? 'red' : 'blue';
                     }, 150000 / i)
                 }
                 setTimeout(() => {
