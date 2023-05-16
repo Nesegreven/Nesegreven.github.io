@@ -12,6 +12,7 @@ var app = new Vue({
         uName: "",
         wColor: 'red',
         drawing: false,
+        flashing: false,
     },
     components: {},
     computed: {},
@@ -33,6 +34,7 @@ var app = new Vue({
                 this.wColor = 'red';
                 for (let i = 10; i < 100; i++) {
                     setTimeout(() => {
+                        this.flashing = true;
                         n = ~~(Math.random() * (this.tickets.length));
                         this.winner = this.tickets[n];
                         this.winningNumber = n;
@@ -43,6 +45,7 @@ var app = new Vue({
                     this.removeTicket(this.winningNumber);
                     this.wColor = 'green';
                     this.drawing = false;
+                    this.flashing = false;
                     startConfetti();
                 }, 16050)
                 setTimeout2(() => {
