@@ -35,7 +35,7 @@
         <div><button class="m-button" v-on:click="ticketdrawing = !ticketdrawing;removeConfetti();">Legg til flere lodd</button></div>
         <div><button :disabled="drawing" class="a-button" v-on:click="drawTicket">Trekk lodd</button></div>
         <table>
-            <h1 v-bind:class="[wColor]" id="winner"  v-if="winner">{{winner}}</h1>
+            <h1 v-bind:class="[wColor]" id="winner"  v-if="winner">{{winningNumber}} {{winner}}</h1>
             <tr v-if="previousWinners.length" v-for="(ticket,i) in previousWinners">
                 <td>{{winningNumber}} {{ticket}}</td>
                 <td><button class="r-button" v-on:click="undoDrawing(i)">Legg tilbake lodd</button></td>
