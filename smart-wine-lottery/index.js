@@ -49,7 +49,7 @@ var app = new Vue({
                 }, 16050)
                 setTimeout(() => {
                     removeConfetti();
-                }, 25000)
+                }, 30000)
             }
         },
         undoDrawing(i) {
