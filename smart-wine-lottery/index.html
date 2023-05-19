@@ -37,7 +37,7 @@
         <table>
             <h1 v-bind:class="[wColor]" id="winner"  v-if="winner">{{winningNumber}} {{winner}}</h1>
             <tr v-if="previousWinners.length" v-for="(ticket,i) in previousWinners">
-                <td>{{winningNumber}} {{ticket}}</td>
+                <td>{{ticket}}</td>
                 <td><button class="r-button" v-on:click="undoDrawing(i)">Legg tilbake lodd</button></td>
             </tr>
         </table>
