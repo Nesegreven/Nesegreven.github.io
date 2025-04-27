@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <title>36 spørsmål - Bli bedre kjent</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Prøv 36 spørsmål for å bli kjent men noen eller få en dypere relasjon med noen du kjenner.">
+  <style>
+    :root {
+      --primary-color: #ffb4a2;
+      --text-color: #865a56;
+      --white: #ffffff;
+      --transition-time: 0.5s;
+      --font-heading: 'Playfair Display SC', serif;
+      --font-body: 'Playfair Display', serif;
+      --font-button: 'Josefin Sans', sans-serif;
+    }
+    
+    /* Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Global styles */
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    body {
+      background-color: var(--primary-color);
+      color: var(--text-color);
+      font-family: var(--font-body);
+      font-size: 130%;
+      line-height: 1.8;
+      text-align: left;
+    }
+    
+    @media (max-width: 700px) {
+      body {
+        font-size: 100%;
+        line-height: 1.6;
+      }
+    }
+    
+    @media (max-height: 400px) {
+      body {
+        font-size: 80%;
+        line-height: 1.6;
+      }
+    }
+    
+    /* Layout */
+    .container {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition-time) ease, visibility var(--transition-time) ease;
+      z-index: 1;
+    }
+    
+    .container.active {
+      opacity: 1;
+      visibility: visible;
+      z-index: 100;
+    }
+    
+    .container-inner {
+      max-width: 30em;
+      padding: 0 3em;
+      margin: 0 auto;
+      width: 100%;
+    }
+    
+    /* Typography */
+    .title-section {
+      margin-bottom: 0.4em;
+      font-size: 240%;
+      text-align: center;
+      white-space: nowrap;
+    }
+    
+    @media (max-width: 480px) {
+      .title-section {
+        font-size: 7vw;
+      }
+    }
+    
+    h1 {
+      margin-left: -0.1em;
+      color: var(--white);
+      font-size: 119%;
+      font-family: var(--font-heading);
+      font-weight: normal;
+      line-height: 0.1;
+    }
+    
+    h1 span {
+      position: relative;
+      top: 0.28em;
+      font-size: 300%;
+    }
+    
+    h2 {
+      margin-left: 4.6em;
+      margin-top: 0.45em;
+      color: var(--text-color);
+      font-size: 81%;
+      font-style: italic;
+      font-weight: normal;
+    }
+    
+    #intro p {
+      text-align: justify;
+    }
+    
+    /* Buttons */
+    button {
+      display: block;
+      width: 16em;
+      margin: 1.5em auto 0 auto;
+      border: 3px solid var(--white);
+      border-radius: 5px;
+      outline: none;
+      padding: 0.8em 0 0.5em 0;
+      background-color: transparent;
+      color: var(--white);
+      font-size: 90%;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-family: var(--font-button);
+      cursor: pointer;
+      transition: all 0.15s linear;
+    }
+    
+    button:hover {
+      background-color: var(--white);
+      color: var(--primary-color);
+    }
+    
+    @media (max-width: 700px) {
+      button {
+        width: 100%;
+      }
+    }
+    
+    #instructions button {
+      width: 8em;
+    }
+    
+    /* Questions */
+    .questions-container {
+      display: none;
+    }
+    
+    .question {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition-time) ease, visibility var(--transition-time) ease;
+      font-size: 200%;
+      font-style: italic;
+      text-align: center;
+    }
+    
+    .question.active {
+      opacity: 1;
+      visibility: visible;
+      z-index: 100;
+    }
+    
+    .question-inner {
+      max-width: 28em;
+      padding: 0 4em;
+      margin: 0 auto;
+      width: 100%;
+    }
+    
+    @media (max-width: 700px) {
+      .question {
+        font-size: 135%;
+      }
+      
+      .question-inner {
+        padding: 0 2.5em;
+      }
+    }
+    
+    /* Navigation */
+    .navigation {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background-color: var(--white);
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 2s ease, opacity 1s linear;
+      opacity: 0;
+      z-index: 1;
+    }
+    
+    .navigation.active {
+      opacity: 1;
+    }
+    
+    /* Navigation controls container */
+    .nav-controls {
+      position: fixed;
+      bottom: 20px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease-in-out;
+    }
+    
+    .nav-controls.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .nav-button {
+      width: 4em;
+      height: 2.5em;
+      border-radius: 8px;
+      border: 0 none transparent;
+      background-color: rgba(255,255,255,0.2);
+      color: var(--white);
+      font-family: var(--font-button);
+      font-size: 110%;
+      cursor: pointer;
+      transition: all 0.15s linear;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .nav-button:hover {
+      background-color: var(--white);
+      color: var(--primary-color);
+    }
+    
+    /* Touch areas for swipe/tap navigation */
+    .touch-area {
+      position: fixed;
+      top: 0;
+      height: 100%;
+      width: 30%;
+      z-index: 150;
+      cursor: pointer;
+      display: none;
+    }
+    
+    .touch-area.active {
+      display: block;
+    }
+    
+    .touch-area-left {
+      left: 0;
+    }
+    
+    .touch-area-right {
+      right: 0;
+    }
+    
+    /* Question number */
+    .question-number {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      width: 4em;
+      margin-left: -2em;
+      margin-top: -0.415em;
+      color: var(--white);
+      font-size: 1600%;
+      font-family: var(--font-button);
+      text-align: center;
+      line-height: 1;
+      opacity: 0;
+      transition: opacity 1s linear;
+    }
+    
+    .question-number.active {
+      opacity: 0.15;
+    }
+    
+    /* Final screens */
+    #stare {
+      text-align: center;
+    }
+    
+    #stare p:first-child {
+      margin-bottom: 1.5em;
+      color: var(--white);
+    }
+    
+    #stare-intro {
+      display: block;
+    }
+    
+    #stare-countdown,
+    #stare-active,
+    #stare-complete {
+      display: none;
+    }
+    
+    #stare-countdown {
+      font-size: 4rem;
+      color: var(--white);
+      margin: 2rem 0;
+    }
+    
+    #stare-active {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    #stare-message {
+      font-size: 2.5rem;
+      color: var(--white);
+      opacity: 0.7;
+      margin-top: 3rem;
+    }
+    
+    .flash-animation {
+      animation: flash-background 0.3s ease-in-out 6;
+    }
+    
+    @keyframes flash-background {
+      0%, 100% { background-color: var(--primary-color); }
+      50% { background-color: var(--white); }
+    }
+    
+    #stare-complete {
+      padding: 2rem;
+      color: var(--white);
+    }
+    
+    #stare-complete h2 {
+      font-size: 2rem;
+      margin: 1rem 0;
+      text-align: center;
+      color: var(--white);
+    }
+    
+    #stare-complete p {
+      margin-bottom: 1.5rem;
+    }
+
+    /* Accessibility improvements */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic|Josefin+Sans:700|Playfair+Display+SC&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main>
+    <!-- Introduction screen -->
+    <section id="intro" class="container active" aria-live="polite">
+      <div class="container-inner">
+        <div class="title-section">
+          <h1><span>36</span> Spørsmål</h1>
+          <h2>Bli bedre kjent</h2>
+        </div>
+        <p><em>36 spørsmål</em> man kan stille hverandre for å bli kjent, eller få en dypere relasjon med noen man allerede kjenner. Denne siden er laget for å gi en god opplevelse til de som vil prøve å stille hverandre de 36 spørsmålene. Sett deg ned sammen med noen du vil bli bedre kjent med. <button id="start-button">Klikk her for å starte</button></p>
+      </div>
+    </section>
+    
+    <!-- Instructions screen -->
+    <section id="instructions" class="container" aria-live="polite">
+      <div class="container-inner">
+        <p><strong>Instruksjoner:</strong> Skru av mobilene og vær et sted dere ikke blir forstyrret. Les hvert spørsmål høyt før dere begge svarer. Bytt hvem som leser opp spørsmålet for hver gang. <em>Å svare på alle spørsmålene tar cirka en time, men ta den tiden dere trenger og ikke stress gjennom spørsmålene&hellip;</em> <button id="start-questions">ok</button></p>
+      </div>
+    </section>
+    
+    <!-- Questions -->
+    <div id="questions" class="questions-container">
+      <!-- Questions will be loaded dynamically from JSON -->
+    </div>
+    
+    <!-- Final screen -->
+    <section id="stare" class="container" aria-live="polite">
+      <div class="container-inner">
+        <!-- Introduction to staring exercise -->
+        <div id="stare-intro">
+          <p>Gratulerer, dere har svart på alle spørsmålene! Nå kommer den vanskeligste delen</p>
+          <p>Sett av nøyaktig fire minutter til å se hverandre dypt inn i øynene <em>uten å si et ord eller snakke til hverandre.</em> Det vil være uvant, kanskje ubehagelig, men dere vil lære mye om hverandre og knytte et sterkere bånd.</p>
+          <button id="start-staring">Start øvelsen</button>
+        </div>
+        
+        <!-- Countdown before staring -->
+        <div id="stare-countdown">
+          <p>Gjør dere klare</p>
+          <div id="countdown-number">10</div>
+          <p>Finn en behagelig posisjon</p>
+        </div>
+        
+        <!-- Active staring view -->
+        <div id="stare-active">
+          <div id="stare-message">Se på hverandre</div>
+        </div>
+        
+        <!-- Completion message -->
+        <div id="stare-complete">
+          <h2>Tiden er ute!</h2>
+          <p>Vi håper at denne opplevelsen har hjulpet dere til å føle en dypere forbindelse med hverandre.</p>
+          <p>Å dele personlige tanker og følelser, og å være til stede med hverandre uten å snakke, kan skape bånd som varer livet ut.</p>
+          <p>Takk for at dere deltok i denne opplevelsen sammen.</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Touch areas for easier mobile navigation -->
+    <div class="touch-area touch-area-left" aria-hidden="true"></div>
+    <div class="touch-area touch-area-right" aria-hidden="true"></div>
+    
+    <!-- Navigation controls -->
+    <div class="nav-controls">
+      <button class="nav-button prev-button" aria-label="Forrige spørsmål">&larr;</button>
+      <button class="nav-button next-button" aria-label="Neste spørsmål">&rarr;</button>
+    </div>
+    
+    <!-- Navigation elements -->
+    <div class="question-number" aria-hidden="true"></div>
+    <div class="navigation" aria-hidden="true"></div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // DOM elements
+      const introSection = document.getElementById('intro');
+      const instructionsSection = document.getElementById('instructions');
+      const questionsContainer = document.getElementById('questions');
+      const stareSection = document.getElementById('stare');
+      const questionNumber = document.querySelector('.question-number');
+      const progress = document.querySelector('.navigation');
+      const prevButton = document.querySelector('.prev-button');
+      const nextButton = document.querySelector('.next-button');
+      
+      // Buttons
+      const startButton = document.getElementById('start-button');
+      const startQuestionsButton = document.getElementById('start-questions');
+      const startStaringButton = document.getElementById('start-staring');
+      
+      // Variables
+      let currentQuestionIndex = 0;
+      let totalQuestions = 0;
+      let questions = [];
+      let wakeLock = null; // For keeping the screen awake
+      
+      // Load questions from JSON file
+      fetch('questions.json')
+        .then(response => response.json())
+        .then(data => {
+          questions = data;
+          totalQuestions = questions.length;
+          
+          // Create question elements
+          questions.forEach(question => {
+            const article = document.createElement('article');
+            article.className = 'question';
+            article.dataset.index = question.id;
+            
+            const inner = document.createElement('div');
+            inner.className = 'question-inner';
+            inner.textContent = question.text;
+            
+            article.appendChild(inner);
+            questionsContainer.appendChild(article);
+          });
+          
+          // Set up event listeners
+          setupEventListeners();
+        })
+        .catch(error => {
+          console.error('Error loading questions:', error);
+          alert('Det oppstod en feil ved lasting av spørsmål. Vennligst oppdater siden.');
+        });
+      
+      // Set up event listeners after questions are loaded
+      function setupEventListeners() {
+        // Event listeners for buttons
+        startButton.addEventListener('click', showInstructions);
+        startQuestionsButton.addEventListener('click', startQuestions);
+        prevButton.addEventListener('click', showPreviousQuestion);
+        nextButton.addEventListener('click', showNextQuestion);
+        startStaringButton.addEventListener('click', startStaringCountdown);
+        
+        // Event listeners for touch areas
+        const touchAreaLeft = document.querySelector('.touch-area-left');
+        const touchAreaRight = document.querySelector('.touch-area-right');
+        touchAreaLeft.addEventListener('click', showPreviousQuestion);
+        touchAreaRight.addEventListener('click', showNextQuestion);
+        
+        // Enable keyboard navigation
+        document.addEventListener('keydown', function(event) {
+          // Only respond to keyboard when questions are visible
+          const activeQuestion = document.querySelector('.question.active');
+          if (!activeQuestion) return;
+          
+          if (event.key === 'ArrowRight' || event.key === ' ' || event.key === 'Enter') {
+            showNextQuestion();
+          } else if (event.key === 'ArrowLeft') {
+            showPreviousQuestion();
+          }
+        });
+      }
+      
+      // Function to request a wake lock to keep screen awake
+      async function requestWakeLock() {
+        try {
+          if ('wakeLock' in navigator) {
+            wakeLock = await navigator.wakeLock.request('screen');
+            wakeLock.addEventListener('release', () => {
+              console.log('Wake Lock released');
+            });
+            console.log('Wake Lock acquired');
+          } else {
+            console.log('Wake Lock API not supported');
+          }
+        } catch (err) {
+          console.error(`Wake Lock error: ${err.name}, ${err.message}`);
+        }
+      }
+      
+      // Function to release wake lock
+      function releaseWakeLock() {
+        if (wakeLock !== null) {
+          wakeLock.release()
+            .then(() => {
+              wakeLock = null;
+            });
+        }
+      }
+      
+      // Main navigation
+      function showInstructions() {
+        introSection.classList.remove('active');
+        instructionsSection.classList.add('active');
+      }
+      
+      function startQuestions() {
+        instructionsSection.classList.remove('active');
+        questionsContainer.style.display = 'block';
+        
+        // Activate navigation elements
+        const navControls = document.querySelector('.nav-controls');
+        navControls.classList.add('active');
+        const touchAreas = document.querySelectorAll('.touch-area');
+        touchAreas.forEach(area => area.classList.add('active'));
+        
+        // Show first question
+        showQuestion(0);
+      }
+      
+      function showQuestion(index) {
+        // Hide all questions
+        const allQuestions = document.querySelectorAll('.question');
+        allQuestions.forEach(q => {
+          q.classList.remove('active');
+        });
+        
+        // Show the selected question
+        currentQuestionIndex = index;
+        const questionToShow = document.querySelector(`.question[data-index="${index + 1}"]`);
+        if (questionToShow) {
+          questionToShow.classList.add('active');
+        }
+        
+        // Update UI elements
+        updateNavigationElements();
+      }
+      
+      function showNextQuestion() {
+        if (currentQuestionIndex < totalQuestions - 1) {
+          showQuestion(currentQuestionIndex + 1);
+        } else {
+          finishQuestions();
+        }
+      }
+      
+      function showPreviousQuestion() {
+        if (currentQuestionIndex > 0) {
+          showQuestion(currentQuestionIndex - 1);
+        }
+      }
+      
+      function finishQuestions() {
+        const allQuestions = document.querySelectorAll('.question');
+        allQuestions.forEach(q => {
+          q.classList.remove('active');
+        });
+        questionsContainer.style.display = 'none';
+        stareSection.classList.add('active');
+        
+        // Hide navigation elements
+        const navControls = document.querySelector('.nav-controls');
+        navControls.classList.remove('active');
+        document.querySelector('.touch-area-left').style.display = 'none';
+        document.querySelector('.touch-area-right').style.display = 'none';
+        
+        // Complete the progress bar
+        progress.style.transform = 'scaleX(1)';
+      }
+      
+      function updateNavigationElements() {
+        // Update question number
+        questionNumber.textContent = currentQuestionIndex + 1;
+        questionNumber.classList.add('active');
+        
+        // Update progress bar
+        progress.classList.add('active');
+        progress.style.transform = `scaleX(${(currentQuestionIndex + 1) / totalQuestions})`;
+        
+        // Update navigation button visibility
+        if (currentQuestionIndex > 0) {
+          prevButton.style.visibility = 'visible';
+        } else {
+          prevButton.style.visibility = 'hidden';
+        }
+      }
+      
+      // Staring exercise functions
+      function startStaringCountdown() {
+        // Hide intro and show countdown
+        document.getElementById('stare-intro').style.display = 'none';
+        document.getElementById('stare-countdown').style.display = 'block';
+        
+        // Start countdown from 10 to 0
+        let count = 10;
+        const countdownNumber = document.getElementById('countdown-number');
+        countdownNumber.textContent = count;
+        
+        const countdownInterval = setInterval(() => {
+          count--;
+          countdownNumber.textContent = count;
+          
+          if (count <= 0) {
+            clearInterval(countdownInterval);
+            startStaringTimer();
+          }
+        }, 1000);
+      }
+      
+      function startStaringTimer() {
+        // Request wake lock to keep screen on
+        requestWakeLock();
+        
+        // Hide countdown and show active staring screen
+        document.getElementById('stare-countdown').style.display = 'none';
+        document.getElementById('stare-active').style.display = 'flex';
+        
+        // Start 4-minute timer (240 seconds)
+        const timerDuration = 240; // 4 minutes
+        
+        setTimeout(() => {
+          endStaringTimer();
+        }, timerDuration * 1000);
+      }
+      
+      function endStaringTimer() {
+        // Add flash animation to body
+        document.body.classList.add('flash-animation');
+        
+        // Show completion message after animation
+        setTimeout(() => {
+          document.body.classList.remove('flash-animation');
+          document.getElementById('stare-active').style.display = 'none';
+          document.getElementById('stare-complete').style.display = 'block';
+          
+          // Release wake lock
+          releaseWakeLock();
+        }, 2000); // Animation duration
+      }
+      
+      // Enable keyboard navigation
+      document.addEventListener('keydown', function(event) {
+        // Only respond to keyboard when questions are visible
+        if (!questions[currentQuestionIndex]?.classList.contains('active')) return;
+        
+        if (event.key === 'ArrowRight' || event.key === ' ' || event.key === 'Enter') {
+          showNextQuestion();
+        } else if (event.key === 'ArrowLeft') {
+          showPreviousQuestion();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
