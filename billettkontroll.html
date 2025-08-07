@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Validation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #d3d3d3;
+            transition: background-color 0.3s ease;
+            font-family: Arial, sans-serif;
+        }
+        
+        .input-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        
+        input[type="text"] {
+            padding: 15px 20px;
+            font-size: 18px;
+            border: 2px solid #999;
+            border-radius: 8px;
+            outline: none;
+            width: 300px;
+            text-align: center;
+            background-color: white;
+        }
+        
+        input[type="text"]:focus {
+            border-color: #666;
+        }
+        
+        .error-state {
+            background-color: #ff0000 !important;
+        }
+        
+        .error-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 48px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            display: none;
+            text-align: center;
+            margin-top: 100px;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="input-container">
+        <input type="text" id="ticketInput" placeholder="" autofocus>
+    </div>
+    
+    <div class="error-message" id="errorMessage">UGYLDIG BILLETT</div>
+
+    <script>
+        const ticketInput = document.getElementById('ticketInput');
+        const errorMessage = document.getElementById('errorMessage');
+        const inputContainer = document.querySelector('.input-container');
+        let isShowingError = false;
+        
+        ticketInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' && !isShowingError && ticketInput.value.trim() !== '') {
+                showError();
+            }
+        });
+        
+        function showError() {
+            isShowingError = true;
+            
+            // Hide input field and show error
+            inputContainer.classList.add('hidden');
+            errorMessage.style.display = 'block';
+            document.body.classList.add('error-state');
+            
+            // Reset after 10 seconds
+            setTimeout(function() {
+                resetToNormal();
+            }, 10000);
+        }
+        
+        function resetToNormal() {
+            // Hide error message
+            errorMessage.style.display = 'none';
+            document.body.classList.remove('error-state');
+            
+            // Show input field again
+            inputContainer.classList.remove('hidden');
+            
+            // Clear and focus input
+            ticketInput.value = '';
+            ticketInput.focus();
+            
+            isShowingError = false;
+        }
+        
+        // Ensure input stays focused
+        document.addEventListener('click', function() {
+            if (!isShowingError) {
+                ticketInput.focus();
+            }
+        });
+    </script>
+</body>
+</html>
